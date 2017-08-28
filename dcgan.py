@@ -37,18 +37,22 @@ parser.add_argument('--sample_step', type=int, default=50)
 
 ##### Helper Function for Image Loading
 class ImageFolder(data.Dataset):
-    def __init__(self, root, transform=None):  # Initializes image paths and preprocessing module.
+    def __init__(self, root, transform=None):
+        # os.listdir Function gives all lists of directory
         self.image_paths = list(map(lambda x: os.path.join(root, x), os.listdir(root)))
         self.transform = transform
 
-    def __getitem__(self, index):  # Reads an image from a file and preprocesses it and returns.
+    def __getitem__(self, index):
         image_path = self.image_paths[index]
         image = Image.open(image_path).convert('RGB')
+
+        # Transform
         if self.transform is not None:
             image = self.transform(image)
+
         return image
 
-    def __len__(self):  # Returns the total number of image files.
+    def __len__(self):
         return len(self.image_paths)
 
 ##### Helper Function for GPU Training
@@ -70,6 +74,7 @@ def main():
     args = parser.parse_args()
     print(args)
 
+    # Pre-processing
     transform = transforms.Compose([
         transforms.Scale((args.image_size, args.image_size)),
         transforms.ToTensor(),
@@ -99,8 +104,8 @@ def main():
     d_optimizer = optim.Adam(discriminator.parameters(), args.lr, [args.beta1, args.beta2])
 
     if torch.cuda.is_available():
-        generator.cuda()
-        discriminator.cuda()
+        generator = generator.cuda()
+        discriminator = discriminator.cuda()
 
     """Train generator and discriminator."""
     fixed_noise = to_variable(torch.randn(args.batch_size, args.z_dim))  # For Testing
@@ -118,7 +123,7 @@ def main():
 
             # Fake -> Fake & Real -> Real
             fake_images = generator(noise)
-            d_loss = -torch.mean(torch.log(discriminator(images)) + torch.log(1 - discriminator(fake_images)))
+            d_loss = -torch.mean(torch.log(discriminator(images) + 1e-8) + torch.log(1 - discriminator(fake_images) + 1e-8))
 
             # Optimization
             discriminator.zero_grad()
@@ -131,7 +136,7 @@ def main():
 
             # Fake -> Real
             fake_images = generator(noise)
-            g_loss = -torch.mean(torch.log(discriminator(fake_images)))
+            g_loss = -torch.mean(torch.log(discriminator(fake_images) + 1e-8))
 
             # Optimization
             discriminator.zero_grad()

@@ -48,7 +48,7 @@ def main():
     generator.eval()
 
     if torch.cuda.is_available():
-        generator.cuda()
+        generator = generator.cuda()
 
     # Sample the images
     noise = to_variable(torch.randn(args.sample_size, args.z_dim))
