@@ -1,12 +1,16 @@
 # DCGAN in Pytorch
 
-[[GAN](https://github.com/taeoh-kim/GANin50lines)][[DCGAN](https://github.com/taeoh-kim/Pytorch_DCGAN)][[InfoGAN](https://github.com/taeoh-kim/Pytorch_InfoGAN)][[Pix2Pix](https://github.com/taeoh-kim/Pytorch_Pix2Pix)][[DiscoGAN](https://github.com/taeoh-kim/Pytorch_DiscoGAN)]
-
 Basic Implementation (Study friendly) of DCGAN in Pytorch
 
 More Information: [Original Paper](https://arxiv.org/abs/1511.06434)
 
-Identical Tensorflow Implemenation is on the [HyeongminLEE's Github](https://github.com/HyeongminLEE/DCGAN_Tensorflow)
+Identical Tensorflow Implemenation is on the [HyeongminLEE's Github](https://github.com/HyeongminLEE/Tensorflow_DCGAN)
+
+- GAN: [[Pytorch](https://github.com/taeoh-kim/GANin50lines)][[Tensorflow](https://github.com/HyeongminLEE/GANin50lines)]
+- DCGAN: [[Pytorch](https://github.com/taeoh-kim/Pytorch_DCGAN)][[Tensorflow](https://github.com/HyeongminLEE/Tensorflow_DCGAN)]
+- InfoGAN: [[Pytorch](https://github.com/taeoh-kim/Pytorch_InfoGAN)][Tensorflow]
+- Pix2Pix: [[Pytorch](https://github.com/taeoh-kim/Pytorch_Pix2Pix)][Tensorflow]
+- DiscoGAN: [[Pytorch](https://github.com/taeoh-kim/Pytorch_DiscoGAN)][Tensorflow]
 
 ## 1. Environments
 
